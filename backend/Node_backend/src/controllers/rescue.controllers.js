@@ -41,9 +41,7 @@ export const applyForRescue = async (req, res) => {
 
 
 // 🔹 GET MY TASKS
-export const getMyTasks =
-  async (req, res) => {
-
+export const getMyTasks = async (req, res) => {
     try {
 
       const tasks = await assignment.find({rescueId: req.user.id}).populate("incidentId");
@@ -60,5 +58,31 @@ export const getMyTasks =
         message: error.message
       });
 
+    }
+};
+
+// 🔹 upload rescue document
+export const uploadDocument = async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({
+          success: false,
+          message: "No file uploaded"
+        });
+      }
+       const result =
+        await uploadToCloudinary(
+          req.file.buffer
+        );
+
+      res.status(200).json({
+        success: true,
+        url: result.secure_url
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: error.message
+      });
     }
 };
