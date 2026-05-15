@@ -85,10 +85,9 @@ backend/
 │   ├── services/
 │   ├── utils/
 │   ├── uploads/
-│   │
-│   ├── app.js
-│   └── server.js
 │
+│── app.js
+│── server.js
 ├── logs/
 ├── .env
 ├── package.json
