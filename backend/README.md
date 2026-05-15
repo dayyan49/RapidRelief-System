@@ -75,22 +75,40 @@ A scalable disaster management backend system built using Node.js, Express.js, M
 ```bash
 backend/
 │
-├── src/
+│──Node_backend
 │   │
-│   ├── config/
-│   ├── controllers/
-│   ├── middleware/
-│   ├── models/
-│   ├── routes/
-│   ├── services/
-│   ├── utils/
-│   ├── uploads/
+│   ├── src/
+│   │   │
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   ├── utils/
+│   │   ├── uploads/
+│   │   └── app.js
+│   │
+│   │──.env
+│   │── index.js
+│   ├── package-lock.json
+│   └── package.json
+│ 
 │
-│── app.js
-│── server.js
-├── logs/
-├── .env
-├── package.json
+│──Python_backend
+│   │
+│   ├── app/
+│   │   │
+│   │   ├── ml/
+│   │   ├── routes/
+│   │   ├── schemas/
+│   │   ├── services/
+│   │   └── spatial/
+│   │
+│   │── __pycachae__
+│   │── main.py
+│   └── requirement.txt
+│
 └── README.md
 ```
 
