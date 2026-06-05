@@ -16,7 +16,6 @@ app.use("/api/rescue", rescueRouter)
 app.use("/api/assignment", assignmentRouter)
 app.use("/api/admin", adminRouter)
 
-
 app.use(errorMiddleware)
 
 export default app;

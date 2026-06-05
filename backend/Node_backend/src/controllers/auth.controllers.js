@@ -37,7 +37,7 @@ export const registerUser = async (req, res) => {
       });
     }
 
-    if (isValidPassword(password)) {
+    if (!isValidPassword(password)) {
       return res.status(400).json({
         success: false,
         message: "Password must be at least 6 chars"
@@ -107,6 +107,7 @@ export const loginUser = async (req, res) => {
       phoneNumber,
       password
     } = req.body;
+    
 
     if ((!email && !phoneNumber) || !password) {
       return res.status(400).json({
