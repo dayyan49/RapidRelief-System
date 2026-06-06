@@ -151,8 +151,9 @@ npm install
 Create a `.env` file in the frontend root.
 
 ```env
-VITE_API_URL=http://localhost:8000/api
+VITE_API_URL=/api
 VITE_SOCKET_URL=http://localhost:8000
+VITE_BACKEND_URL=http://localhost:8000
 ```
 
 ---
