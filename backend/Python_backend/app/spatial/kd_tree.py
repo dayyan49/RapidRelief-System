@@ -1,48 +1,45 @@
-from scipy.spatial import KDTree
+import math
 
 
-def build_tree(resources):
-    """
-    Build KD-tree from rescue resources
-    """
+def _haversine(lat1, lon1, lat2, lon2):
+    r = 6371
+    d_lat = math.radians(lat2 - lat1)
+    d_lon = math.radians(lon2 - lon1)
+    a = (
+        math.sin(d_lat / 2) ** 2
+        + math.cos(math.radians(lat1))
+        * math.cos(math.radians(lat2))
+        * math.sin(d_lon / 2) ** 2
+    )
+    return r * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
 
-    if not resources:
-        return None, []
 
-    # coordinate points
-    points = [
-        (r["lat"],r["lon"])
-        for r in resources
-    ]
-
-    # build tree
-    tree = KDTree(points)
-    return tree, points
+def _brute_force_nearest(resources, target_location, k):
+    ranked = sorted(
+        resources,
+        key=lambda r: _haversine(
+            target_location[0], target_location[1], r["lat"], r["lon"]
+        ),
+    )
+    return ranked[:k]
 
 
 def find_nearest_resources(resources, target_location, k=1):
-    """
-    Find nearest rescue teams
-    """
     if not resources:
         return []
 
-    # build tree
-    tree, _ = build_tree(resources)
-
-    # prevent overflow
     k = min(k, len(resources))
 
-    # query nearest
-    distances, indexes = tree.query(target_location, k=k)
+    try:
+        from scipy.spatial import KDTree
 
-    # single result handling
-    if isinstance(indexes, int):
-        indexes = [indexes]
+        points = [(r["lat"], r["lon"]) for r in resources]
+        tree = KDTree(points)
+        distances, indexes = tree.query(target_location, k=k)
 
-    nearest = [
-        resources[i]
-        for i in indexes
-    ]
+        if isinstance(indexes, int):
+            indexes = [indexes]
 
-    return nearest
+        return [resources[i] for i in indexes]
+    except Exception:
+        return _brute_force_nearest(resources, target_location, k)

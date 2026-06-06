@@ -42,12 +42,30 @@ const incidentSchema = new mongoose.Schema({
         "FIRE",
         "LANDSLIDE",
         "CYCLONE",
+        "STORM",
         "OTHER"
       ],
       default: "OTHER"
     },
 
     description: String,
+
+    rainfallMm: Number,
+    roadBlockagePercent: Number,
+    medicalNeedLevel: { type: Number, min: 1, max: 10 },
+    elderlyPopulation: Number,
+    infrastructureDamageLevel: { type: Number, min: 1, max: 10 },
+    areaSizeKm2: Number,
+    hospitalDistanceKm: Number,
+    responseTimeTargetMin: Number,
+
+    mlPredictions: {
+      teamsRequired: Number,
+      ambulancesRequired: Number,
+      foodPacketsRequired: Number,
+      medicalKitsRequired: Number,
+      predictedAt: Date,
+    },
 
 }, {timestamps: true});
 

@@ -1,2 +1,4 @@
 venv
 disaster_management_dataset.xlsx
+__pycache__/
+*.pyc

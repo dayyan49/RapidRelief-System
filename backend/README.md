@@ -148,7 +148,7 @@ CLOUDINARY_API_SECRET=your_api_secret
 # Development Mode
 
 ```bash
-npm run dev
+npm start
 ```
 
 ## 🧠 Python ML Service

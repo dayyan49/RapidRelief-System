@@ -6,7 +6,7 @@ export const isValidEmail = (email) => {
 
 // 🔹 password validation
 export const isValidPassword = (password) => {
-    return password && password.length <= 6;
+    return password && password.length >= 6;
 };
 
 

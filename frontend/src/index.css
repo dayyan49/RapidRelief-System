@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+@theme {
+  --color-navy-950: #0a0f1e;
+  --color-navy-900: #0f172a;
+  --color-navy-800: #1e293b;
+  --color-teal-400: #2dd4bf;
+  --color-teal-500: #14b8a6;
+  --color-teal-600: #0d9488;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #14b8a6 #0f172a;
+}
+
+body {
+  @apply bg-navy-950 text-slate-100 antialiased;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+.glass-card {
+  @apply bg-slate-900/60 backdrop-blur-xl border border-white/10 rounded-2xl shadow-xl;
+}
+
+.glass-nav {
+  @apply bg-navy-950/80 backdrop-blur-xl border-b border-white/10;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-teal-400 to-cyan-300 bg-clip-text text-transparent;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.leaflet-container {
+  background: #0f172a !important;
+  font-family: inherit;
+}

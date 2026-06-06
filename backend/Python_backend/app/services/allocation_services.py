@@ -1,65 +1,74 @@
-from ml.predictor import (predict_resources)
-from spatial.kd_tree import (find_nearest_resources)
-from spatial.geo_utils import (is_valid_coordinate)
+from app.ml.predictor import predict_resources
+from app.spatial.kd_tree import find_nearest_resources
+from app.spatial.geo_utils import is_valid_coordinate
 
 
 def allocate_resources(data):
-    """
-    Main allocation pipeline
-    """
-    # 🔹 extract input
-    severity = data.severity
-
-    population = data.population
-
     location = data.location
+    resources = [r.model_dump() for r in data.resources]
 
-    resources = [
-        r.dict()
-        for r in data.resources
-    ]
-
-
-    # 🔹 validate incident location
     incident_lat = location[0]
     incident_lon = location[1]
 
-    if not is_valid_coordinate(incident_lat,incident_lon):
-        raise ValueError(
-            "Invalid incident coordinates"
-        )
+    if not is_valid_coordinate(incident_lat, incident_lon):
+        raise ValueError("Invalid incident coordinates")
 
+    valid_resources = [
+        resource
+        for resource in resources
+        if is_valid_coordinate(resource["lat"], resource["lon"])
+    ]
 
-    # 🔹 filter valid rescue locations
-    valid_resources = []
-
-    for resource in resources:
-
-        lat = resource["lat"]
-        lon = resource["lon"]
-
-        if is_valid_coordinate(lat, lon):
-            valid_resources.append(resource )
-
-
-    # 🔹 no rescue available
     if not valid_resources:
-
+        predictions = predict_resources(data)
         return {
-            "teams_required": 0,
+            "teams_required": predictions["teams_required"],
+            "ambulances_required": predictions["ambulances_required"],
+            "food_packets_required": predictions["food_packets_required"],
+            "medical_kits_required": predictions["medical_kits_required"],
             "allocated": [],
             "message": "No valid rescue resources available"
         }
 
-    # 🔹 ML prediction
-    teams_required = predict_resources( data )
+    predictions = predict_resources(data)
+    teams_required = predictions["teams_required"]
 
-    # 🔹 KD-tree nearest allocation
-    nearest_resources = find_nearest_resources(valid_resources, location, teams_required)
+    nearest_resources = find_nearest_resources(
+        valid_resources,
+        [incident_lat, incident_lon],
+        teams_required
+    )
 
-    # 🔹 response
     return {
-        "teams_required": teams_required,
+        "teams_required": predictions["teams_required"],
+        "ambulances_required": predictions["ambulances_required"],
+        "food_packets_required": predictions["food_packets_required"],
+        "medical_kits_required": predictions["medical_kits_required"],
         "allocated": nearest_resources,
         "message": "Allocation successful"
     }
+
+
+def find_nearby_centers(location, centers, k=5):
+    resources = [
+        {
+            "id": center["id"],
+            "lat": center["lat"],
+            "lon": center["lon"],
+            "name": center.get("name", ""),
+            "type": center.get("type", ""),
+        }
+        for center in centers
+        if is_valid_coordinate(center["lat"], center["lon"])
+    ]
+
+    if not resources:
+        return []
+
+    nearest = find_nearest_resources(
+        resources,
+        [location[0], location[1]],
+        min(k, len(resources))
+    )
+
+    return nearest

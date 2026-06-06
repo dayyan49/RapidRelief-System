@@ -73,6 +73,12 @@ const userSchema = new mongoose.Schema({
 
   skills: [String],
 
+  rescueApplicationStatus: {
+    type: String,
+    enum: ["NONE", "PENDING", "APPROVED", "REJECTED"],
+    default: "NONE"
+  },
+
   availability: {
     type: String,
     enum: ["FULL_TIME", "PART_TIME", "OFF_DUTY"],
@@ -94,7 +100,10 @@ const userSchema = new mongoose.Schema({
   isLoggedIn: {
     type: Boolean,
     default: false
-  }
+  },
+
+  resetToken: String,
+  resetExpires: Date
 
 }, { timestamps: true });
 

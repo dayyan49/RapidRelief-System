@@ -1,0 +1,32 @@
+{
+  "model_type": "numpy_linear",
+  "numeric_features": [
+    "severity",
+    "affected_population",
+    "rainfall_mm",
+    "road_blockage_percent",
+    "medical_need_level",
+    "elderly_population",
+    "infrastructure_damage_level",
+    "rescue_team_availability",
+    "area_size_km2",
+    "hospital_distance_km",
+    "response_time_target_min"
+  ],
+  "disaster_types": [
+    "CYCLONE",
+    "EARTHQUAKE",
+    "FIRE",
+    "FLOOD",
+    "LANDSLIDE",
+    "STORM"
+  ],
+  "targets": [
+    "teams_required",
+    "ambulances_required",
+    "food_packets_required",
+    "medical_kits_required"
+  ],
+  "training_samples": 1000,
+  "source": "disaster_management_dataset.xlsx"
+}

@@ -6,7 +6,7 @@ export const getPendingRescues = async (req, res) => {
     try {
 
       const users =
-        await User.find({status: "PENDING"});
+        await User.find({ rescueApplicationStatus: "PENDING" });
 
       return res.status(200).json({
         success: true,
@@ -44,6 +44,7 @@ export const approveRescue =
 
       user.role = "RESCUE";
       user.status = "ACTIVE";
+      user.rescueApplicationStatus = "APPROVED";
 
       user.verification.isVerified = true;
       user.verification.verifiedAt =

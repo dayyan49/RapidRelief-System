@@ -2,94 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Rapid Relief System</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RapidRelief</title>
   </head>
   <body>
-    <div class="container">
-      <!-- Sidebar -->
-      <div class="sidebar">
-        <h2>🚨 Rapid Relief</h2>
-        <ul>
-          <li class="active">Dashboard</li>
-          <li>Live Map</li>
-          <li>Nearest Shelter</li>
-          <li>Disaster Info</li>
-          <li>Alerts</li>
-          <li>Resources</li>
-          <li>Chat Assistance</li>
-          <li>Profile</li>
-          <li>Settings</li>
-        </ul>
-
-        <button class="sos">SOS CALL</button>
-      </div>
-
-      <!-- Main -->
-      <div class="main">
-        <!-- Header -->
-        <div class="header">
-          <h2>Live Map & Resource Tracking</h2>
-          <button class="top-sos">SOS CALL</button>
-        </div>
-
-        <!-- Map Section -->
-        <div class="map">
-          <p>📍 Map</p>
-        </div>
-
-        <!-- Cards -->
-        <div class="cards">
-          <!-- Nearest Shelter -->
-          <div class="card shelter">
-            <img src="tent.jpg" alt="Descriptive text" width="200" />
-
-            <div>
-              <h3>Nearest Shelter</h3>
-              <h4>Green Field Shelter</h4>
-              <p>0.8 km away</p>
-              <p>Capacity: 120 people</p>
-
-              <div class="tags">
-                <span>Food</span>
-                <span>Water</span>
-                <span>Medical Kit</span>
-                <span>Rest Area</span>
-              </div>
-
-              <button class="green-btn">Get Directions</button>
-            </div>
-          </div>
-
-          <!-- Disaster Info -->
-          <div class="card disaster">
-            <h3>Current Disaster Information</h3>
-
-            <div class="alert-box">
-              ⚠ Flood Alert <br />
-              Heavy rainfall expected in your area. Stay safe!
-            </div>
-
-            <ul>
-              <li>🚫 Avoid walking in flood water</li>
-              <li>🎒 Keep emergency kit ready</li>
-            </ul>
-
-            <a href="#">View Full Guidance →</a>
-          </div>
-
-          <!-- AI Assistant -->
-          <div class="card chat">
-            <h3>AI Assistant 🤖</h3>
-            <p class="bot-msg">Hello! I'm your Rapid Relief Assistant.</p>
-
-            <input type="text" placeholder="Type your message..." />
-            <button class="send-btn">➤</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script src="script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -4,4 +4,7 @@ numpy
 scipy
 scikit-learn
 pandas
+openpyxl
 joblib
+
+# Train model: python -m app.ml.train
