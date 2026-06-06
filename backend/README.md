@@ -142,6 +142,14 @@ CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 
 CLOUDINARY_API_SECRET=your_api_secret
+
+ADMIN_EMAIL=your_admin_email_id
+
+ADMIN_PASSWORD=your_admin_password
+
+ADMIN_NAME=System Admin
+
+ADMIN_PHONE=yout_admin_phone_number
 ```
 
 ## ▶️ Run Backend
